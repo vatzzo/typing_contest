@@ -1,0 +1,32 @@
+<nav>
+        <ul class="word-list" >
+            <li class="liEl" [style.transform]="'translateX(calc(-'+ index +'*100%))'">.</li>
+            <li class="liEl" [style.transform]="'translateX(calc(-'+ index +'*100%))'">.</li>
+
+            <!-- For Each Element Display Word On Navigation Bar  -->
+            <li class="liEl" [style.transform]="'translateX(calc(-'+ index +'*100%))'" *ngFor="let word of words; index as i"> {{ this.wordsType1[i] }}</li>
+        </ul>
+    
+     <div class="pointer"></div>
+</nav>
+
+<!-- Choose A Proper List Everytime A User Clicks An Option Button -->
+<button class="option-btn" (click)="onImport(1)">EN</button>
+<button class="option-btn" (click)="onImport(2)">PL</button>
+<button class="option-btn" (click)="onImport(3)">EN / PL</button>
+<button class="option-btn" (click)="onImport(4)">PL / EN</button>
+
+<section id="section-one">
+     <div id="circle" class="circle">
+         <div class="hand" id="hand"></div>
+         <div class="number number1">1</div>
+         <div class="number number2">2</div>
+         <div class="number number3">3</div>
+         <div class="number number4">4</div>
+         <div class="number number5">5</div>
+         <div class="number number6">6</div>
+     </div>
+
+     <!-- Functions Which Check And Compare User Values To Current Word and To Controll Animation on Circle -->
+     <input (keyup)="onInput($event.target.value)" (click)="changeHandPosition()" type="text" class="text-field" id="text-field" placeholder="Enter the word...">
+</section>

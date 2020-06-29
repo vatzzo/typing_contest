@@ -1,0 +1,36 @@
+$black: rgb(31, 31, 31);
+$green: #afffca;
+$purple: #4a4181;
+$purple2: #986bdf;
+
+@mixin flex($direction, $alignItems, $justifyContent) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+}
+
+.navigation-bar {
+    @include flex(row, center, space-evenly);
+    list-style-type: none;
+    text-transform: uppercase;
+    font-size: 150%;
+    padding: 1vh;
+    background-color: white;
+
+    li {
+        cursor: pointer;
+
+        a {
+            text-decoration: none;
+            color: $black;
+
+            &:hover {
+                transform: scale(1.08);
+                color: $purple;
+                font-weight: bold;
+            }
+        } 
+    }
+    
+}

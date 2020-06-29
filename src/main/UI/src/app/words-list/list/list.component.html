@@ -1,0 +1,31 @@
+<!-- After Clicking A List Of Words Is Going To Be Imported -->
+<button (click)="onImport()">Import Words</button>
+
+<div class="underline"></div>
+
+<ul class="words-list">
+
+    <!-- Displaying Subsequent Words In English And Polish Language -->
+    <!-- Also Creating An Element That Will Be Responsible For Removing Particular Records From DB -->
+    <!-- After Clicking On Li Element, Words From That Li Element Will Be Uploaded To Add Word Inputs  -->
+    <li *ngFor="let word of words; index as i"> <span class="box" (click)="onLiClick($event.target.value, words[i].id)"> {{ words[i].en }} , {{ words[i].pl }} </span> <button class="remove" (click)="removeElement($event, words[i].id)">X</button></li>
+</ul>
+
+<div class="word-form">
+
+    <!-- Addition Of New Words -->
+    <button class="form-button" (click)="addWord()">Add Word</button>
+    <div class="underline"></div>
+    <label>Word In English</label>
+
+    <!-- Validation Function Usage -->
+    <input (keyup)="validateEn($event.target.value)" class="word-en" type="text" placeholder="Write down word in English"/>
+    <label>Word In Polish</label>
+
+    <!-- Validation Function Usage -->
+    <input (keyup)="validatePl($event.target.value)"  class="word-pl" type="text" placeholder="Write down word in Polish"/>
+</div>
+
+<div class="here">
+
+</div>
