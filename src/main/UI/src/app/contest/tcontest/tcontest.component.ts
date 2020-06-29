@@ -16,10 +16,10 @@ export class TContestComponent implements OnInit {
   wordsType1 = [];
   wordsType2 = [];
   wordInput: string;
-  currentWord: string;
   index: number = 0;
   circleState: boolean;
   iterations: number = 0;
+
 
 
 
@@ -47,7 +47,7 @@ export class TContestComponent implements OnInit {
 
   // Circle Events
     // Change Circle Color Everytime When User Give Some Input
-  changeCircleStyle(circleState: boolean) {
+  changeCircleStyle(circleState: any) {
     const circle = document.getElementById('circle');
     if(circleState === true) {
       circle.style.backgroundColor = 'rgb(175, 255, 202)';
@@ -55,6 +55,9 @@ export class TContestComponent implements OnInit {
     } else if (circleState === false) {
       circle.style.backgroundColor = 'rgb(255, 175, 202)'
       circle.style.transition = 'background-color 0.4s esee-in';
+    }else {
+      circle.style.backgroundColor = 'white';
+      circle.style.transition = 'background-color 0.4s ease-in';
     }
   }
 
@@ -64,7 +67,11 @@ export class TContestComponent implements OnInit {
         let clockInterval = setInterval(() => {
           (<HTMLDivElement>hand).style.setProperty('--rotation', (this.iterations/6 * 360).toString());
             if(this.iterations==6){
-                alert('Game Over !');
+              clearInterval(clockInterval);
+              this.resetHandPosition();
+              this.changeCircleStyle('1');
+              alert('Game Over !');
+              location.replace('http://localhost:8081/typing_contest-0.0.0');
             }
             this.iterations++;
         } , 500);

@@ -568,6 +568,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } else if (circleState === false) {
             circle.style.backgroundColor = 'rgb(255, 175, 202)';
             circle.style.transition = 'background-color 0.4s esee-in';
+          } else {
+            circle.style.backgroundColor = 'white';
+            circle.style.transition = 'background-color 0.4s ease-in';
           }
         } // Change Hand Position
 
@@ -581,7 +584,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             hand.style.setProperty('--rotation', (_this.iterations / 6 * 360).toString());
 
             if (_this.iterations == 6) {
+              clearInterval(clockInterval);
+
+              _this.resetHandPosition();
+
+              _this.changeCircleStyle('1');
+
               alert('Game Over !');
+              location.replace('http://localhost:8081/typing_contest-0.0.0');
             }
 
             _this.iterations++;
@@ -1304,22 +1314,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "getWordsList",
         value: function getWordsList() {
           var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-          var url = this.baseUrl + '/words/'; // Request Of Type Get That Is Used In .ts File To Upload List Of Words From Database
+          var url = "".concat(this.baseUrl, "/words//").concat(id.toString()); // Request Of Type Get That Is Used In .ts File To Upload List Of Words From Database
 
-          return this.http.get(url + id);
+          return this.http.get(url);
         } // Request Of Type Delete That Is Used In .ts File To Delete A Record In Database
 
       }, {
         key: "deleteWord",
         value: function deleteWord(id) {
-          var url = this.baseUrl + '/words/';
-          return this.http["delete"](url + id.toString());
+          var url = "".concat(this.baseUrl, "/words//").concat(id.toString());
+          return this.http["delete"](url);
         } // Request Of Type Delete That Is Used In .ts File To Add A Record In Database
 
       }, {
         key: "addWord",
         value: function addWord(word) {
-          var url = this.baseUrl + '/words/';
+          var url = this.baseUrl + '/words';
           var header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('Content-Type', 'application/json');
           return this.http.post(url, word, {
             headers: header

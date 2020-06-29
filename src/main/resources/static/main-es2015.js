@@ -311,6 +311,10 @@ class TContestComponent {
             circle.style.backgroundColor = 'rgb(255, 175, 202)';
             circle.style.transition = 'background-color 0.4s esee-in';
         }
+        else {
+            circle.style.backgroundColor = 'white';
+            circle.style.transition = 'background-color 0.4s ease-in';
+        }
     }
     // Change Hand Position
     changeHandPosition() {
@@ -318,7 +322,11 @@ class TContestComponent {
         let clockInterval = setInterval(() => {
             hand.style.setProperty('--rotation', (this.iterations / 6 * 360).toString());
             if (this.iterations == 6) {
+                clearInterval(clockInterval);
+                this.resetHandPosition();
+                this.changeCircleStyle('1');
                 alert('Game Over !');
+                location.replace('http://localhost:8081/typing_contest-0.0.0');
             }
             this.iterations++;
         }, 500);
@@ -685,18 +693,18 @@ class TypingappService {
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl;
     }
     getWordsList(id = "") {
-        let url = this.baseUrl + '/words/';
+        let url = `${this.baseUrl}/words//${id.toString()}`;
         // Request Of Type Get That Is Used In .ts File To Upload List Of Words From Database
-        return this.http.get(url + id);
+        return this.http.get(url);
     }
     // Request Of Type Delete That Is Used In .ts File To Delete A Record In Database
     deleteWord(id) {
-        let url = this.baseUrl + '/words/';
-        return this.http.delete(url + id.toString());
+        let url = `${this.baseUrl}/words//${id.toString()}`;
+        return this.http.delete(url);
     }
     // Request Of Type Delete That Is Used In .ts File To Add A Record In Database
     addWord(word) {
-        let url = this.baseUrl + '/words/';
+        let url = this.baseUrl + '/words';
         const header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('Content-Type', 'application/json');
         return this.http.post(url, word, { headers: header });
     }
